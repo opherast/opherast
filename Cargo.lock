@@ -2072,6 +2072,7 @@ dependencies = [
  "deunicode",
  "dotenvy",
  "eyre",
+ "once_cell",
  "sea-orm 2.0.0-rc.1",
  "thiserror 2.0.12",
  "ulid",

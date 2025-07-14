@@ -7,10 +7,9 @@ impl Command for ListCommand {
         "list"
     }
     fn run(&self, _args: &[String]) -> eyre::Result<()> {
-        let cmds = crate::cli::builtin_commands();
         println!("📦 Comandi disponibili:");
-        for cmd in cmds {
-            println!(" - {}", cmd.name());
+        for name in crate::cli::runner::command_names() {
+            println!(" - {}", name);
         }
         Ok(())
     }
