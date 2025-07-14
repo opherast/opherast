@@ -1,8 +1,8 @@
 use crate::cli::command::Command;
 
-pub struct ListCommandsCommand;
+pub struct ListCommand;
 
-impl Command for ListCommandsCommand {
+impl Command for ListCommand {
     fn name(&self) -> &'static str {
         "list"
     }

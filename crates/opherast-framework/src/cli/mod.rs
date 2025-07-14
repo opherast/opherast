@@ -3,15 +3,15 @@ pub mod commands;
 pub mod runner;
 
 
-use command::Command;
+pub use command::Command;
 use commands::check::CheckCommand;
 use commands::make_feature::MakeFeatureCommand;
-use commands::list::ListCommandsCommand;
+use commands::list::ListCommand;
 
 pub fn builtin_commands() -> Vec<Box<dyn Command>> {
     vec![
         Box::new(CheckCommand),
         Box::new(MakeFeatureCommand),
-        Box::new(ListCommandsCommand)
+        Box::new(ListCommand)
     ]
 }

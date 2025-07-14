@@ -13,7 +13,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let commands_dir = Path::new("../opherast-framework/src/cli/commands");
     let mut output = String::new();
 
-    output.push_str("use crate::command::Command;\n");
+    output.push_str("use opherast_framework::cli::Command;\n");
 
     let mut init = String::from("pub fn builtin_commands() -> Vec<Box<dyn Command>> {\n    vec![\n");
 
@@ -33,7 +33,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         let module = file_stem.to_string();
         let type_name = format!("{}Command", to_pascal_case(&module));
 
-        output.push_str(&format!("use crate::commands::{}::{};\n", module, type_name));
+        output.push_str(&format!("use opherast_framework::cli::commands::{}::{};\n", module, type_name));
         init.push_str(&format!("        Box::new({}),\n", type_name));
     }
 
@@ -51,9 +51,13 @@ fn main() -> Result<(), Box<dyn Error>> {
 }
 
 fn to_pascal_case(s: &str) -> String {
-    let mut c = s.chars();
-    match c.next() {
-        None => String::new(),
-        Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
-    }
+    s.split('_')
+        .map(|word| {
+            let mut c = word.chars();
+            match c.next() {
+                None => String::new(),
+                Some(f) => f.to_uppercase().collect::<String>() + c.as_str()
+            }
+        })
+        .collect()
 }
