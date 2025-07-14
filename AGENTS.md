@@ -105,6 +105,41 @@ impl Command for Generate {
 
 ---
 
+## 🛠 `build.rs` e Registrazione Dinamica dei Comandi CLI
+
+Il file `build.rs` presente in `opherast-cli/` ha un ruolo fondamentale nella generazione automatica della funzione `builtin_commands()`.
+
+Questa funzione:
+
+```rust
+pub fn builtin_commands() -> Vec<Box<dyn Command>> {
+    vec![
+        Box::new(InitCommand),
+        Box::new(GenerateCommand),
+        ...
+    ]
+}
+```
+
+viene **auto-generata** in fase di build analizzando tutti i file `.rs` all'interno di `opherast-framework/src/cli/commands/`, eccetto `mod.rs`.
+
+### 🔍 Perché è importante?
+
+- Permette di **aggiungere nuovi comandi CLI semplicemente creando un file**, senza modificare manualmente `mod.rs` o una lista statica.
+- È pensato per mantenere **apertura e modularità**, facilitando estensioni del CLI.
+- Ogni file viene associato a un tipo `XCommand`, dove `X` è il nome del file in PascalCase (`generate.rs` → `GenerateCommand`).
+- La funzione generata è usata per popolare il dispatcher del CLI (`cargo opherast`).
+
+### ⚠️ Nota per agenti AI
+
+**Non suggerire la rimozione di `build.rs`:**  
+serve per generare codice Rust valido e coerente al momento della compilazione.  
+**Non è un file temporaneo o ridondante.**
+
+Se un comando non viene registrato, è probabile che manchi il file `.rs` corretto o non sia incluso nella cartella `commands`.
+
+---
+
 ## 🤖 Note per Evoluzione
 
 In futuro saranno aggiunti:
