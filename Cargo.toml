@@ -1,0 +1,45 @@
+[workspace]
+members = [
+    "crates/opherast-framework",
+    "crates/opherast-cli"
+]
+
+[package]
+name = "opherast"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# Web framework
+axum = "0.8.4"
+tower = "0.5.2"
+
+# Async runtime
+tokio = { version = "1.38.2", features = ["full"] }
+
+# JSON serialization
+serde = { version = "1.0.199", features = ["derive"] }
+serde_json = "1.0.116"
+
+# Tracing/logging
+dotenvy = "0.15"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+
+# OAuth2 + PKCE
+oauth2 = "5.0.0"
+
+# Policy-based Access Control
+casbin = { version = "2.2.1", features = ["runtime-tokio", "logging"] }
+
+# CLI + Error
+clap = "4.5.41"
+eyre = "0.6.12"
+color-eyre = "0.6.5"
+
+# Databases
+sea-orm = { version = "1.1", features = ["sqlx-postgres", "sqlx-mysql", "sqlx-sqlite", "runtime-tokio-rustls"] }
+
+
+[dev-dependencies]
+sea-orm-cli = "1.1.13"
