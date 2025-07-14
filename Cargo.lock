@@ -2045,6 +2045,8 @@ dependencies = [
  "color-eyre",
  "dotenvy",
  "eyre",
+ "http-body-util",
+ "hyper",
  "oauth2",
  "sea-orm 1.1.13",
  "sea-orm-cli",
