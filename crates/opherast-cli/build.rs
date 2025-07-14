@@ -45,7 +45,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     let mut file = File::create(dest_path)?;
     file.write_all(output.as_bytes())?;
 
-    println!("cargo:rerun-if-changed=src/commands");
+    println!("cargo:rerun-if-changed=../opherast-framework/src/cli/commands");
 
     Ok(())
 }
