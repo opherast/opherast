@@ -30,6 +30,13 @@ The CLI tool is provided by the `opherast-cli` crate. Invoke it via Cargo:
 cargo run -p opherast-cli -- <command>
 ```
 
+Alternatively, you can use the alias defined in `.cargo/config.toml` which
+maps `cargo opherast` to the command above:
+
+```bash
+cargo opherast <command>
+```
+
 Run the `list` command to see the available commands.
 
 ## Crates overview
