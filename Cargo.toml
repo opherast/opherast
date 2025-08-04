@@ -1,7 +1,8 @@
 [workspace]
 members = [
     "crates/opherast-framework",
-    "crates/opherast-cli"
+    "crates/opherast-cli",
+    "crates/opherast-core"
 ]
 
 [package]
@@ -13,6 +14,7 @@ edition = "2021"
 # Web framework
 axum = "0.8.4"
 tower = "0.5.2"
+opherast-core = { path = "./crates/opherast-core" }
 
 # Async runtime
 tokio = { version = "1.38.2", features = ["full"] }

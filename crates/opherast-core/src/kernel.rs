@@ -1,12 +1,7 @@
-mod generated {
-    include!(concat!(env!("OUT_DIR"), "/builtin_commands.rs"));
-}
 use color_eyre::Result;
 use once_cell::sync::OnceCell;
 
 use crate::command::Command;
-
-pub use generated::builtin_commands;
 
 static COMMAND_NAMES: OnceCell<Vec<&'static str>> = OnceCell::new();
 

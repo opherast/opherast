@@ -1,4 +1,4 @@
-use crate::command::Command;
+use opherast_core::command::Command;
 use std::env;
 
 pub struct CheckCommand;

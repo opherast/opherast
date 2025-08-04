@@ -2048,6 +2048,7 @@ dependencies = [
  "http-body-util",
  "hyper",
  "oauth2",
+ "opherast-core",
  "sea-orm 1.1.13",
  "sea-orm-cli",
  "serde",
@@ -2062,9 +2063,17 @@ dependencies = [
 name = "opherast-cli"
 version = "0.1.0"
 dependencies = [
- "color-eyre",
  "dotenvy",
  "eyre",
+ "opherast",
+ "opherast-core",
+]
+
+[[package]]
+name = "opherast-core"
+version = "0.1.0"
+dependencies = [
+ "color-eyre",
  "once_cell",
 ]
 
