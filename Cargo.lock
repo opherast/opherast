@@ -2062,7 +2062,10 @@ dependencies = [
 name = "opherast-cli"
 version = "0.1.0"
 dependencies = [
- "opherast-framework",
+ "color-eyre",
+ "dotenvy",
+ "eyre",
+ "once_cell",
 ]
 
 [[package]]
@@ -2070,11 +2073,8 @@ name = "opherast-framework"
 version = "0.1.0"
 dependencies = [
  "chrono",
- "color-eyre",
  "deunicode",
  "dotenvy",
- "eyre",
- "once_cell",
  "sea-orm 2.0.0-rc.1",
  "thiserror 2.0.12",
  "ulid",

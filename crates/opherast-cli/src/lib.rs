@@ -1,5 +1,3 @@
-mod generated {
-    include!(concat!(env!("OUT_DIR"), "/builtin_commands.rs"));
-}
-
-pub use generated::builtin_commands;
+pub mod commands;
+pub mod command;
+pub mod kernel;

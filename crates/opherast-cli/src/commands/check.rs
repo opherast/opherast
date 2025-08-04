@@ -1,4 +1,4 @@
-use crate::cli::command::Command;
+use crate::command::Command;
 use std::env;
 
 pub struct CheckCommand;

@@ -9,44 +9,47 @@ use std::{
 fn main() -> Result<(), Box<dyn Error>> {
     let out_dir = env::var("OUT_DIR")?;
     let dest_path = Path::new(&out_dir).join("builtin_commands.rs");
-
-    let commands_dir = Path::new("../opherast-framework/src/cli/commands");
+    let commands_dir = Path::new("./src/commands");
     let mut output = String::new();
-
-    output.push_str("use opherast_framework::cli::Command;\n");
-
+    output.push_str("use crate::command::Command;\n");
     let mut init = String::from("pub fn builtin_commands() -> Vec<Box<dyn Command>> {\n    vec![\n");
-
     for entry in fs::read_dir(commands_dir)? {
         let entry = entry?;
         let path = entry.path();
-
         if path.extension().and_then(|s| s.to_str()) != Some("rs") {
             continue;
         }
-
         let file_stem = path.file_stem().unwrap().to_string_lossy();
         if file_stem == "mod" {
             continue;
         }
-
         let module = file_stem.to_string();
         let type_name = format!("{}Command", to_pascal_case(&module));
-
-        output.push_str(&format!("use opherast_framework::cli::commands::{}::{};\n", module, type_name));
+        output.push_str(&format!("use crate::commands::{}::{};\n", module, type_name));
         init.push_str(&format!("        Box::new({}),\n", type_name));
     }
-
     init.push_str("    ]\n}\n");
-
     output.push_str("\n");
     output.push_str(&init);
-
     let mut file = File::create(dest_path)?;
     file.write_all(output.as_bytes())?;
-
-    println!("cargo:rerun-if-changed=../opherast-framework/src/cli/commands");
-
+    let commands_dir = Path::new("./src/commands");
+    let mod_path = commands_dir.join("mod.rs");
+    let mut mod_file = String::new();
+    for entry in fs::read_dir(commands_dir).unwrap() {
+        let entry = entry.unwrap();
+        let path = entry.path();
+        if path.extension().and_then(|s| s.to_str()) != Some("rs") {
+            continue;
+        }
+        let file_stem = path.file_stem().unwrap().to_string_lossy();
+        if file_stem == "mod" {
+            continue;
+        }
+        mod_file.push_str(&format!("pub mod {};\n", file_stem));
+    }
+    File::create(mod_path).unwrap().write_all(mod_file.as_bytes()).unwrap();
+    println!("cargo:rerun-if-changed=./src/commands");
     Ok(())
 }
 

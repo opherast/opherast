@@ -1,4 +1,5 @@
-use crate::cli::command::Command;
+use crate::command::Command;
+use crate::kernel;
 
 pub struct ListCommand;
 
@@ -8,7 +9,7 @@ impl Command for ListCommand {
     }
     fn run(&self, _args: &[String]) -> eyre::Result<()> {
         println!("📦 Available Commands:");
-        for name in crate::cli::runner::command_names() {
+        for name in kernel::command_names() {
             println!(" - {}", name);
         }
         Ok(())

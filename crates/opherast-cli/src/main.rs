@@ -1,6 +1,9 @@
-use opherast_cli::builtin_commands;
+mod kernel;
+pub mod command;
+pub mod commands;
+
 fn main() {
-    if let Err(err) = opherast_framework::cli::runner::run_cli(builtin_commands()) {
+    if let Err(err) = crate::kernel::run_cli(kernel::builtin_commands()) {
         eprintln!("❌ {}", err);
         std::process::exit(1);
     }
